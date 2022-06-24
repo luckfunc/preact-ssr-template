@@ -1,0 +1,29 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"checkJs": true,
+		"jsx": "preserve",
+		"skipLibCheck": true,
+		"strict": true,
+		"noImplicitAny": false,
+		"resolveJsonModule": true,
+		"baseUrl": ".",
+		"paths": {
+			"@utils/*": ["./src/utils/*"],
+			"@utils": ["./src/utils"],
+			"@components/*": ["./src/components/*"],
+			"@constants": ["./src/constants"],
+			"@constants/*": ["./src/constants/*"],
+			"@assets/*": ["./src/assets/*"],
+			"@common/*": ["./src/common/*"],
+			"@http": ["./src/common/http"],
+			"@stores/*": ["./src/stores/*"]
+		}
+	},
+	"include": ["./src/**/*", "./typings/**/*"],
+	"exclude": ["./node_modules", "./benefit"]
+}

@@ -1,0 +1,6 @@
+{
+	"development": "",
+	"develop": "",
+	"qa": "http://test.api.com",
+	"production": "http://www.api.com"
+}
