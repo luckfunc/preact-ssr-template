@@ -31,7 +31,7 @@ if (ENV === 'test') { // ENV 在gears中配置
 	host = 'http://www.api.com'; // qa api
 } else if (ENV === 'development'){ // ENV 在package.json中配置
 	// 本地 调用mock接口
-	host = 'http://127.0.0.1:8080';
+	host = 'http://127.0.0.1:2028';
 } else if (ENV === 'qa'){ // ENV 在package.json中配置
 	// 本地 调用qa接口
 	host = 'http://test.api.com'; // qa api
@@ -41,11 +41,18 @@ if (ENV === 'test') { // ENV 在gears中配置
 	host = 'http://www.api.com'; // qa api
 }
 
+// 本地环境, 开启代理: [development: 本地静态资源+mock接口, qa: 本地静态资源+qa接口, pro: 本地静态资源+pro接口]
+if (ENV === 'development' || ENV === 'qa' || ENV === 'pro') {
+	// 开发环境代理(测试与产品环境不会使用到): mock数据 8088 => 2028
+	app.use(proxy(API_PREFIX, { target: host }));
+
+	// 开发环境代理(测试与产品环境不会使用到): 静态资源 8088 => 2028
+	app.use(proxy(`/${name}/`, { target: 'http://127.0.0.1:2028' }));
+}
 app.use(proxy(API_PREFIX, { target: host }));
 
 // home page
 app.get(['/', '/index.html', '/home.html'], function(req, res) {
-	console.log(111111);
 	res.end(homeSSR({}));
 });
 

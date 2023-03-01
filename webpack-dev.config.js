@@ -2,13 +2,14 @@ const webpack = require('webpack');
 const path = require('path');
 const { merge } = require('webpack-merge');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { name, version } = require('./package.json');
 const apiDomains = require('./api-domain.json');
 const commonConfig = require('./webpack-common.config');
 const mockUtils = require('mock-utils/utils');
 
 const SERVER_HOST = '0.0.0.0';
-const SERVER_PORT = 8080;
+const SERVER_PORT = 2028;
 
 const systemEnv = process.env.NODE_ENV;
 const isDev = systemEnv === 'development';
@@ -83,6 +84,11 @@ module.exports = args =>
 
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
+			new CopyWebpackPlugin({
+				patterns: [
+					{from: path.join(__dirname, '/src/assets/images/favicon.ico'), to: './'}
+				]
+			}),
 
             // 配置环境变量
             new webpack.DefinePlugin({

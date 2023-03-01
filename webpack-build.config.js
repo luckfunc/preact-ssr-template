@@ -57,7 +57,7 @@ const MainConfig = {
 	    // CopyWebpackPlugin-> https://github.com/webpack-contrib/copy-webpack-plugin
 	    new CopyWebpackPlugin({
 		    patterns: [
-			    {from: path.join(__dirname, '/ads.txt'), to: './'}
+				{from: path.join(__dirname, '/src/assets/images/favicon.ico'), to: './'}
 		    ]
 	    }),
         new webpack.DefinePlugin({
