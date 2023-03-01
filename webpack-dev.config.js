@@ -8,7 +8,6 @@ const commonConfig = require('./webpack-common.config');
 const mockUtils = require('mock-utils/utils');
 
 const SERVER_HOST = '0.0.0.0';
-// const SERVER_HOST = '172.30.136.77';
 const SERVER_PORT = 8080;
 
 const systemEnv = process.env.NODE_ENV;
@@ -38,7 +37,7 @@ const serverConfig = (args = {}) => {
 		proxy: [
 			{
 				context: [
-					'/ins/v1/',
+					'/api/v1/',
 				],
 				// 后端ip地址
 				target,
