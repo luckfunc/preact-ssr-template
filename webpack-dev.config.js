@@ -11,14 +11,7 @@ const mockUtils = require('mock-utils/utils');
 const SERVER_HOST = '0.0.0.0';
 const SERVER_PORT = 2028;
 
-const systemEnv = process.env.NODE_ENV;
-const isDev = systemEnv === 'development';
-
 const serverConfig = (args = {}) => {
-	if (!isDev) {
-		return {};
-	}
-
 	if (args.mock) {
 		return {
 			before: app => mockUtils(path.resolve(__dirname, './mock'), app)
@@ -93,8 +86,6 @@ module.exports = args =>
             // 配置环境变量
             new webpack.DefinePlugin({
                 'process.env': {
-                    API_DOMAIN: JSON.stringify(apiDomains[systemEnv]),
-                    NODE_ENV: JSON.stringify(systemEnv)
                 }
             }),
 

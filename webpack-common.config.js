@@ -3,17 +3,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { version } = require('./package.json');
 const resolve = dir => path.resolve(__dirname, dir);
-
-const getHtmlConf = module => {
-    let filename = `${module}.html`;
-    let template = `src/page/${module}/index.html`;
-    return {
-        filename,
-        template,
-	    favicon: './src/assets/images/favicon.ico',
-        chunks:['vendor', module]
-    };
-};
+//
+// const getHtmlConf = module => {
+//     let filename = `${module}.html`;
+//     let template = `src/page/${module}/index.html`;
+//     return {
+//         filename,
+//         template,
+// 	    favicon: './src/assets/images/favicon.ico',
+//         chunks:['vendor', module]
+//     };
+// };
 
 module.exports = () => {
     return {
@@ -125,7 +125,7 @@ module.exports = () => {
 	    },
 
         plugins: [
-            new HtmlWebpackPlugin(getHtmlConf('index')),
+            // new HtmlWebpackPlugin(getHtmlConf('index')),
 
             // 抽离样式文件到单独目录
             new MiniCssExtractPlugin({

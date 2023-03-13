@@ -49,18 +49,17 @@ if (ENV === 'development' || ENV === 'qa' || ENV === 'pro') {
 	// 开发环境代理(测试与产品环境不会使用到): 静态资源 8088 => 2028
 	app.use(proxy(`/${name}/`, { target: 'http://127.0.0.1:2028' }));
 }
-app.use(proxy(API_PREFIX, { target: host }));
-
-// home page
-app.get(['/', '/index.html', '/home.html'], function(req, res) {
-	res.end(homeSSR({}));
-});
 
 // 获取其它的静态资源: 访问路径为/xxxx/xx.xx，线上环境通过Gears配置后，这项不会用到
 app.use(express.static(path.join(__dirname, '..')));
 
 // 获取其它的静态资源: 访问路径为/xx.xx，比如/ads.txt会通过这里
 app.use(express.static(path.join(__dirname, `../${name}/`)));
+// home page
+app.get(['/', '/index.html', '/home.html'], function(req, res) {
+	res.end(homeSSR({}));
+});
+
 app.listen(port, function() {
 	console.log('Listening on port %d', port);
 	console.log('api host: ', host);
