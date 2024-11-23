@@ -15,15 +15,11 @@ module.exports = {
 	entry: {
 		index: './src/page/index/ssr.tsx'
 	},
-	// target: 'node',
+	target: 'node',
 	output: {
 		path: serverPath,
 		publicPath: `/${name}/`,
-		// filename: "page.generator.js",
 		filename: `${version}/[name].ssr.js`,
-		// target: 'node',
-		// 使用page.generator.js的是nodejs，所以需要将
-		// webpack模块转化为CMD模块
 		library: 'page',
 		libraryTarget: 'commonjs'
 	},
@@ -35,9 +31,18 @@ module.exports = {
 			'@http': resolve('src/common/http'),
 			'@assets': resolve('src/assets'),
 			'@utils': resolve('src/utils'),
-			'@stores': resolve('./src/stores')
+			'@stores': resolve('./src/stores'),
+			'react': 'preact/compat',
+			'react-dom': 'preact/compat',
+			'react/jsx-runtime': 'preact/jsx-runtime'
 		},
 		extensions: ['.js', '.jsx', '.ts', '.tsx']
+	},
+	externals: {
+		'preact': 'commonjs preact',
+		'preact/compat': 'commonjs preact/compat',
+		'preact-render-to-string': 'commonjs preact-render-to-string',
+		'preact/jsx-runtime': 'commonjs preact/jsx-runtime'
 	},
 	module: {
 		rules: [
@@ -134,11 +139,14 @@ module.exports = {
 				BUILD_NAME: JSON.stringify(name)
 			}
 		}),
-		// 抽离样式文件到单独目录
+		// 添加 Preact 的全局变量定义
+		new webpack.ProvidePlugin({
+			h: ['preact', 'h'],
+			Fragment: ['preact', 'Fragment']
+		}),
 		new MiniCssExtractPlugin({
 			filename: `${version}/[name].ssr.css`,
 			chunkFilename: '[id].css'
-			// ignoreOrder: false, // Enable to remove warnings about conflicting order
 		}),
 	]
 }

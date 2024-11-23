@@ -45,7 +45,13 @@ const serverConfig = (args = {}) => {
 module.exports = args =>
     merge(commonConfig(), {
         mode: 'development',
-
+        resolve: {
+            alias: {
+                'react': 'preact/compat',
+                'react-dom': 'preact/compat',
+                'react/jsx-runtime': 'preact/jsx-runtime'
+            }
+        },
         devtool: 'eval-cheap-module-source-map',
 
         output: {
@@ -53,7 +59,11 @@ module.exports = args =>
             // filename: '[name]_[contenthash].js',
 	        filename: `${version}/[name].entry.js`,
 	        // publicPath: `/${name}/`
-            publicPath: `/${name}/`
+            publicPath: `/${name}/`,
+            module: true,
+            environment: {
+                module: true
+            }
         },
 
         devServer: {
@@ -94,6 +104,14 @@ module.exports = args =>
                 compilationSuccessInfo: {
                     messages: [`Your application is running here: http://${SERVER_HOST}:8088`]
                 }
+            }),
+            new webpack.ProvidePlugin({
+                h: ['preact', 'h'],
+                Fragment: ['preact', 'Fragment'],
+                preact: 'preact'
             })
-        ]
+        ],
+        experiments: {
+            outputModule: true
+        }
     });

@@ -12,9 +12,13 @@
 	  	"sourceMap": true, // 生成相应的 .map文件。
         "baseUrl": "./",
         "paths": {
-            "@*": ["./src/*", "./src/common/*", "./typings/*"]
+            "@*": ["./src/*", "./src/common/*", "./typings/*"],
+            "react": ["./node_modules/preact/compat/"],
+            "react-dom": ["./node_modules/preact/compat/"]
         },
 		"jsx": "react",
+		"jsxFactory": "h",
+		"jsxFragmentFactory": "Fragment",
 		"allowSyntheticDefaultImports": true
 	}
 }

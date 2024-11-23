@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { version } = require('./package.json');
 const resolve = dir => path.resolve(__dirname, dir);
 //
@@ -112,17 +111,13 @@ module.exports = () => {
                 '@http': resolve('src/common/http'),
                 '@assets': resolve('src/assets'),
                 '@utils': resolve('src/utils'),
-                '@stores': resolve('./src/stores')
+                '@stores': resolve('./src/stores'),
+                'react': 'preact/compat',
+                'react-dom': 'preact/compat',
+                'react/jsx-runtime': 'preact/jsx-runtime'
             },
             extensions: ['.js', '.jsx', '.ts', '.tsx']
         },
-
-	    externals: {
-		    'axios': 'axios',
-		    'react': 'React',
-		    'react-dom': 'ReactDOM',
-		    'classnames': 'classNames'
-	    },
 
         plugins: [
             // new HtmlWebpackPlugin(getHtmlConf('index')),
@@ -138,7 +133,7 @@ module.exports = () => {
             //     format: 'progress: [:bar' + chalk.green.bold(':percent') + '] (:elapsed seconds) :msg',
             //     clear: false,
             //     width: 60
-            // })
+            // }),
         ]
     };
 };

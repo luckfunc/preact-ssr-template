@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { h } from 'preact';
+import renderToString from 'preact-render-to-string';
 import App from './app';
 import { getSsrHtml } from '@utils/ssr';
 
 interface IProps {
 }
 export default function SSR(props: IProps) {
-	const content = ReactDOMServer.renderToString(
+	const content = renderToString(
 		<App {...props}/>
 	);
 

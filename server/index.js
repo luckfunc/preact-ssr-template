@@ -1,9 +1,7 @@
 const express = require('express');
 const { version, name } = require('../package.json');
 const proxy = require('http-proxy-middleware');
-const axios = require('axios');
 const path = require('path');
-const React = require('react');
 const { API_PREFIX } = require('./constants');
 
 const app = express();
