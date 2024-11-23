@@ -10,7 +10,7 @@ const entryOrigin = argv.env && argv.env.entryorigin || '';
 
 console.log(`build ssr node, entryOrigin=[${entryOrigin}]`);
 module.exports = {
-	name: "ssr node",
+	name: 'ssr node',
 	mode: 'production',
 	entry: {
 		index: './src/page/index/ssr.tsx'
@@ -147,6 +147,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: `${version}/[name].ssr.css`,
 			chunkFilename: '[id].css'
-		}),
+		})
 	]
 }

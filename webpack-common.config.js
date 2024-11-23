@@ -2,17 +2,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { version } = require('./package.json');
 const resolve = dir => path.resolve(__dirname, dir);
-//
-// const getHtmlConf = module => {
-//     let filename = `${module}.html`;
-//     let template = `src/page/${module}/index.html`;
-//     return {
-//         filename,
-//         template,
-// 	    favicon: './src/assets/images/favicon.ico',
-//         chunks:['vendor', module]
-//     };
-// };
 
 module.exports = () => {
     return {
@@ -120,20 +109,11 @@ module.exports = () => {
         },
 
         plugins: [
-            // new HtmlWebpackPlugin(getHtmlConf('index')),
-
             // 抽离样式文件到单独目录
             new MiniCssExtractPlugin({
                 filename: `${version}/[name].entry.css`,
                 chunkFilename: '[id].css'
-                // ignoreOrder: false, // Enable to remove warnings about conflicting order
-            }),
-            // 打包进度
-            // new ProgressBarPlugin({
-            //     format: 'progress: [:bar' + chalk.green.bold(':percent') + '] (:elapsed seconds) :msg',
-            //     clear: false,
-            //     width: 60
-            // }),
+            })
         ]
     };
 };

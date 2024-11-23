@@ -1,5 +1,3 @@
-/** @jsx h */
-import { h } from 'preact';
 import { hydrate } from 'preact/compat';
 import App from './app';
 import { getSsrProps } from '@utils/ssr';

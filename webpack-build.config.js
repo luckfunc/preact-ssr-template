@@ -16,7 +16,6 @@ const MainConfig = {
 
     output: {
         path: path.resolve(__dirname, `./${name}`),
-        // filename: '[name]_[contenthash].js',
 	    filename: `${version}/[name].entry.js`,
         publicPath: `/${name}/`
     },
@@ -57,7 +56,7 @@ const MainConfig = {
 	    // CopyWebpackPlugin-> https://github.com/webpack-contrib/copy-webpack-plugin
 	    new CopyWebpackPlugin({
 		    patterns: [
-				{from: path.join(__dirname, '/src/assets/images/favicon.ico'), to: './'}
+				{ from: path.join(__dirname, '/src/assets/images/favicon.ico'), to: './' }
 		    ]
 	    }),
         new webpack.DefinePlugin({

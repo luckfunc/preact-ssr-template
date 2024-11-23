@@ -1,12 +1,11 @@
 const webpack = require('webpack');
-const path = require('path');
 const { merge } = require('webpack-merge');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { name, version } = require('./package.json');
-const apiDomains = require('./api-domain.json');
 const commonConfig = require('./webpack-common.config');
 const mockUtils = require('mock-utils/utils');
+const path = require('path');
 
 const SERVER_HOST = '0.0.0.0';
 const SERVER_PORT = 2028;
@@ -31,7 +30,7 @@ const serverConfig = (args = {}) => {
 		proxy: [
 			{
 				context: [
-					'/api/v1/',
+					'/api/v1/'
 				],
 				// 后端ip地址
 				target,
@@ -44,7 +43,6 @@ const serverConfig = (args = {}) => {
 
 module.exports = args =>
     merge(commonConfig(), {
-        mode: 'development',
         resolve: {
             alias: {
                 'react': 'preact/compat',
@@ -56,9 +54,7 @@ module.exports = args =>
 
         output: {
 	        path: path.resolve(__dirname, `./${name}`),
-            // filename: '[name]_[contenthash].js',
 	        filename: `${version}/[name].entry.js`,
-	        // publicPath: `/${name}/`
             publicPath: `/${name}/`,
             module: true,
             environment: {
@@ -89,7 +85,7 @@ module.exports = args =>
             new webpack.HotModuleReplacementPlugin(),
 			new CopyWebpackPlugin({
 				patterns: [
-					{from: path.join(__dirname, '/src/assets/images/favicon.ico'), to: './'}
+					{ from: path.join(__dirname, '/src/assets/images/favicon.ico'), to: './' }
 				]
 			}),
 
