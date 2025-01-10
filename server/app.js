@@ -4,6 +4,7 @@ const { ENV, getHost } = require('./config/env');
 const setupStatic = require('./middleware/static');
 const ssrRoutes = require('./routes/ssr');
 const errorHandler = require('./middleware/errorHandler');
+
 const app = express();
 const port = 8088;
 
@@ -22,8 +23,11 @@ setupStatic(app, { name, host });
 
 // SSR路由
 app.use('/', ssrRoutes);
+
 // 全局错误处理中间件 (必须放在所有路由之后)
-app.use(errorHandler);
+app.use((err, req, res, next) => {
+    errorHandler(err, req, res, next);
+});
 
 // 启动服务
 app.listen(port, () => {

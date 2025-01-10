@@ -1,9 +1,15 @@
 import './style.less';
 
-export default function App() {
+interface IProps {
+	ip: string;
+}
+
+export default function App(props: IProps) {
 	return (
 		<>
 			gagaga
+			{error}
+			{props.ip}
 		</>
 	);
 }
